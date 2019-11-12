@@ -7,6 +7,11 @@
 </head>
 <body>
     <div>
+            <p>Click the button to view the block</p>
+            <button onclick="display()">Try it</button>
+            <p>Block:<span id="index"></span></p>
+    </div>
+    <div>
         <label>Sender name: </label>
         <input id="sender" type="text"/>
     </div>
@@ -17,6 +22,7 @@
     <div>
         <button onclick="add()">Create block</button>
     </div>
+
     <script>
         async function add() {
             var sender = document.getElementById('sender').value
@@ -45,6 +51,35 @@
             console.log(data)
             alert(`${data.data.sender} has been added`)
         }
+
+        async function display() {
+            var data = document.getElementById('index')
+    
+            const response = await fetch('/blocks', {
+                                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                                mode: 'cors', // no-cors, *cors, same-origin
+                                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                                credentials: 'same-origin', // include, *same-origin, omit
+                                headers: {
+                                'Content-Type': 'application/json'
+                                // 'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                redirect: 'follow', // manual, *follow, error
+                                referrer: 'no-referrer', // no-referrer, *client
+                            
+                            });
+            const datalog = await response.json()
+            console.log(datalog)
+            data.innerHTML = datalog.map(dataIndex);
+        
+   }
+
+         function dataIndex(index) {
+            var indexBlock = [index.data.sender];
+            return indexBlock;
+         }
+        
+        
     </script>
 </body>
 </html>
