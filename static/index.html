@@ -9,7 +9,7 @@
     <div>
             <p>Click the button to view the block</p>
             <button onclick="display()">Try it</button>
-            <p>Block:<span id="index"></span></p>
+            <div>Block:<p id="index"></p></div>
     </div>
     <div>
         <label>Sender name: </label>
@@ -70,14 +70,45 @@
                             });
             const datalog = await response.json()
             console.log(datalog)
-            data.innerHTML = datalog.map(dataIndex);
+            var newElem = document.createElement('p');
+            datalog.forEach(item => {
+                var sender = document.createElement('p');
+                sender.textContent = "Sender: " + item.data.sender;
+                newElem.appendChild(sender);
+
+                var receiver = document.createElement('p');
+                receiver.textContent = "Receiver: " + item.data.receiver;
+                newElem.appendChild(receiver);
+
+                var message = document.createElement('p');
+                message.textContent = "Message: " + item.data.Message;
+                newElem.appendChild(message);
+
+                var index = document.createElement('p');
+                index.textContent = "Index: " + item.index;
+                newElem.appendChild(index);
+
+                var time = document.createElement('p');
+                time.textContent = "Time: " + item.timestamp;
+                newElem.appendChild(time);
+
+                var previousHash = document.createElement('p');
+                previousHash.textContent = "Previous hash: " + item.previousHash;
+                newElem.appendChild(previousHash);
+
+                var nonce = document.createElement('p');
+                nonce.textContent = "Nonce: " + item.nonce;
+                newElem.appendChild(nonce);
+                
+                var hash = document.createElement('p');
+                hash.textContent = "Hash: " + item.hash;
+                newElem.appendChild(hash);
+            })
+            data.appendChild(newElem)
         
    }
 
-         function dataIndex(index) {
-            var indexBlock = [index.data.sender];
-            return indexBlock;
-         }
+    
         
         
     </script>
