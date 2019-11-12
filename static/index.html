@@ -42,7 +42,8 @@
                                 body: JSON.stringify(body) // body data type must match "Content-Type" header
                             });
             const data = await response.json()
-            alert(`${data.sender} has been added`)
+            console.log(data)
+            alert(`${data.data.sender} has been added`)
         }
     </script>
 </body>

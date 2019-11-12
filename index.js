@@ -23,7 +23,8 @@ const chains = createAllBlocks()
 
 const createNewBlock = (block) =>{
     block.Message = `Block ${adrianchain.chain.length + 1} has been added to the chain`
-    adrianchain.addNewBlock(new Block(block))
+    const addedBlock = adrianchain.addNewBlock(new Block(block))
+    return addedBlock;
 }
 
 
@@ -39,8 +40,8 @@ app.get('/blocks', (req, res) => {
 app.post('/blocks', (req, res) => {
     console.log(req)
     const body = req.body;
-    createNewBlock(body)
-    return res.json(body)
+    const block = createNewBlock(body)
+    return res.json(block)
 })
 
 const PORT = 3001;

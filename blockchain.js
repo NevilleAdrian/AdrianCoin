@@ -22,6 +22,7 @@ class Blockchain{
         newBlock.hash = newBlock.calculateHash();
         newBlock.mineBlock(this.difficulty)
         this.chain.push(newBlock)
+        return newBlock
     }
 
     isChainValid() {
